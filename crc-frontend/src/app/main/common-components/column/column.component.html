@@ -1,0 +1,13 @@
+<span [formGroup]="tableFormGroup">
+  <span [formGroupName]="rowId">
+    <input 
+      type="number" 
+      class="form-control" 
+      [formControlName]="rowId + index" 
+      (input)="inputChange($event.target.value, index)"
+      [value]="value">
+  </span>
+</span>
+<!-- <span style="margin: 0 auto">
+  234234
+</span> -->

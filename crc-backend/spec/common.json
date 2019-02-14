@@ -1,0 +1,72 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"definitions": {
+		"qTable": {
+			"type": "object",
+			"properties": {
+				"codeBase": {
+					"type": "string"
+				},
+				"key": {
+					"type": "string"
+				},
+				"columns": {
+					"type": "object",
+					"properties": {
+						"count": {
+							"type": "integer"
+						},
+						"columnsTitle": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					}
+				},
+              "hasCompCntValidation": {
+                "type": "boolean",
+                "default": "false"
+              },
+				"hasTotalSum": {
+                  "type": "boolean",
+                  "default": "false"
+				},
+				"rows": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/qTableRow"
+					}
+				}
+			}
+		},
+		"qTableRow": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"text": {
+					"type": "string"
+				},
+				"values": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"rowType": {
+					"type": "string",
+					"enum": [
+						"H",
+						"R"
+					],
+					"default": "R"
+				}
+			},
+			"required": [
+				"rowType"
+			]
+		}
+	}
+}

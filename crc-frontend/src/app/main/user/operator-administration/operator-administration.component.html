@@ -1,0 +1,130 @@
+<div id="company" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+
+    <!-- HEADER -->
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+        fxLayoutAlign.gt-xs="space-between center">
+
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <!--<button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('contacts-main-sidebar')">-->
+            <!--<mat-icon>menu</mat-icon>-->
+            <!--</button>-->
+
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Потребители
+                </span>
+            </div>
+
+        </div>
+        <!-- / APP TITLE -->
+
+
+        <!-- ADD BUTTON -->
+        <button mat-raised-button (click)="addCompany()" class="add-product-button fuse-white mt-24 mt-md-0">
+            <span>Добави нов оператор</span>
+        </button>
+        <!-- / ADD BUTTON -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- CENTER -->
+        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+
+            <mat-form-field appearance="legacy">
+                <input matInput placeholder="ЕИК" (keyup)="applyEIKFilter($event.target.value)">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <mat-form-field style="margin-left:1em;" appearance="legacy">
+                <input matInput placeholder="URI" (keyup)="applyURIFilter($event.target.value)">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <!-- / SEARCH -->
+            <!-- CONTENT -->
+            <div class="content">
+                <mat-table #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}">
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="checkbox">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let company">
+                            <mat-checkbox [(ngModel)]="checkboxes[company.id]" (ngModelChange)="onSelectedChange(contact.id)"
+                                (click)="$event.stopPropagation()">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="eikUri">
+                        <mat-header-cell *matHeaderCellDef>ЕИК/URI</mat-header-cell>
+                        <mat-cell *matCellDef="let company">
+                            <p class="text-truncate font-weight-600">{{company.pid}}/{{company.uid}}</p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Найменование</mat-header-cell>
+                        <mat-cell *matCellDef="let company" fxHide fxShow.gt-sm>
+                            <p class="email text-truncate">
+                                {{company.name}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Phone Column -->
+                    <ng-container matColumnDef="date">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Дата на одобрение</mat-header-cell>
+                        <mat-cell *matCellDef="let company" fxHide fxShow.gt-md>
+                            <p class="phone text-truncate">
+                                <!-- {{company.phone}} --> -
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Phone Column -->
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Статус</mat-header-cell>
+                        <mat-cell *matCellDef="let company" fxHide fxShow.gt-md>
+                            <p class="phone text-truncate">
+                                <!-- {{company.phone}} --> -
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Buttons Column -->
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let company">
+                            <div class="edit-btn">
+                                <button aria-label="edit" mat-raised-button (click)="editCompany(company)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let company; columns: displayedColumns;" class="company"
+                        matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+                    </mat-row>
+                </mat-table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CENTER -->
+
+    </div>
+    <!-- / CONTENT-->
+
+</div>

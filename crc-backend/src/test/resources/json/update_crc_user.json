@@ -1,0 +1,16 @@
+{
+  "firstName": "QWE",
+  "lastName": "QWE",
+  "middleName": "QWE",
+  "egn": "1010101010",
+  "email": "QWE_333@QEW.BG",
+  "usernamePassData": {
+    "username": "bogo333",
+    "password": "123"
+  },
+  "activeFrom": "2019-01-14T00:00:00.000Z",
+  "activeTo": "2019-01-21T00:00:00.000Z",
+  "roles": [
+    "ZES"
+  ]
+}

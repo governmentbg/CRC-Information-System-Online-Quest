@@ -1,0 +1,9 @@
+  <th scope="col">{{ row.text }}</th>
+  <td *ngFor="let value of row.values; let idx=index" 
+    [column] 
+    [value]="value" 
+    [tableFormGroup]="tableFormGroup" 
+    [rowId]="row.id"
+    [index]="idx"
+    (onInputChange)="inputChange($event)">
+  </td>

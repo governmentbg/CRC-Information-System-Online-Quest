@@ -1,0 +1,250 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"description": "Profile API JSON Schema",
+	"definitions": {
+		"Company": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"pid": {
+					"description": "Company EIK",
+					"type": "string",
+					"required": [
+						"true"
+					]
+				},
+				"uid": {
+					"type": "string",
+					"required": [
+						"true"
+					]
+				},
+				"name": {
+					"description": "Company name",
+					"type": "string",
+					"required": [
+						"true"
+					]
+				},
+				"representative": {
+					"$ref": "#/definitions/Representative"
+				},
+				"legalForm": {
+					"type": "string"
+				},
+				"employeesCount": {
+					"type": "integer"
+				},
+				"companyTrademark": {
+					"type": "string"
+				},
+				"phone": {
+					"type": "string"
+				},
+				"fax": {
+					"type": "string"
+				},
+				"companyEmailWeb": {
+					"type": "string"
+				},
+				"authorizedPerson": {
+					"$ref": "#/definitions/User"
+				},
+				"address": {
+					"$ref": "#/definitions/Address"
+				}
+			},
+			"required": [
+				"representative",
+				"authorizedPerson"
+			]
+		},
+		"Representative": {
+			"type": "object",
+			"properties": {
+				"namePrefix": {
+					"type": "string",
+					"enum": [
+						"Mr",
+						"Ms"
+					]
+				},
+				"firstName": {
+					"type": "string"
+				},
+				"middleName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				},
+				"position": {
+					"type": "string"
+				}
+			}
+		},
+		"User": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"namePrefix": {
+					"type": "string",
+					"enum": [
+						"Mr",
+						"Ms"
+					]
+				},
+				"firstName": {
+					"type": "string"
+				},
+				"middleName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				},
+				"egn": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"usernamePassData": {
+					"type": "object",
+					"properties": {
+						"username": {
+							"type": "string"
+						},
+						"password": {
+							"type": "string"
+						}
+					}
+				},
+				"signatureDeviceData": {
+					"type": "object",
+					"properties": {
+						"egnFromDevice": {
+							"type": "string"
+						},
+						"mailFromDevice": {
+							"type": "string"
+						}
+					}
+				},
+              "activeFrom": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "activeTo": {
+                "type": "string",
+                "format": "date-time"
+              },
+				"activationStatus": {
+					"type": "boolean"
+				},
+				"roles": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Roles"
+					},
+					"default": [
+						"USER"
+					]
+                },
+              "companyToServe": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+				}
+			},
+			"required": [
+				"firstName",
+				"lastName",
+				"egn",
+				"email"
+			]
+		},
+		"Address": {
+			"type": "object",
+			"properties": {
+				"ekatte": {
+					"$ref": "#/definitions/Ekatte"
+				},
+				"address": {
+					"type": "string"
+				},
+				"postalCode": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"ekatte"
+			]
+		},
+		"Ekatte": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"minLength": 5,
+					"maxLength": 5
+				},
+				"type": {
+					"type": "string"
+				},
+				"place": {
+					"type": "string"
+				},
+				"municipality": {
+					"type": "string"
+				},
+				"district": {
+					"type": "string"
+				},
+				"fullName": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"id"
+			]
+		},
+		"EkatteReq": {
+			"type": "object",
+			"properties": {
+				"place": {
+					"type": "string"
+				}
+			}
+		},
+		"UserSearchCriteria": {
+			"type": "object",
+			"properties": {
+				"criteria": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"criteria"
+			]
+		},
+		"Roles": {
+			"type": "string",
+			"enum": [
+				"USER",
+				"CRC_USER",
+				"ADMIN",
+				"POST",
+				"ZES"
+			]
+		}
+	}
+}

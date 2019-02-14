@@ -1,0 +1,361 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "zesQuestionnaire": {
+      "type": "object",
+      "properties": {
+        "company": {
+          "$ref": "./profile.json#/definitions/Company"
+        },
+        "contact": {
+          "$ref": "#/definitions/contactPerson"
+        }
+      }
+    },
+
+    "postQuestionnaire": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "default": "1"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "company": {
+          "$ref": "./profile.json#/definitions/Company"
+        },
+        "contact": {
+          "$ref": "#/definitions/contactPerson"
+        },
+        "commonPart": {
+          "type": "object",
+          "properties": {
+            "P1": {
+              "type": "boolean",
+              "description": ""
+            },
+            "A1": {
+              "type": "object",
+              "title": "SectionA1",
+              "description": "Финансови показатели на дружеството",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "В този контейнер са данните за секцията",
+                  "properties": {
+                    "table": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    }
+                  }
+                }
+              }
+            },
+            "A2": {
+              "type": "object",
+              "title": "SectionA2",
+              "description": "Извършени пощенски услуги",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "b1": {
+                      "type": "boolean"
+                    },
+                    "table1": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    },
+                    "b2": {
+                      "type": "boolean"
+                    },
+                    "table2": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    },
+                    "b3": {
+                      "type": "boolean"
+                    },
+                    "table3": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    }
+                  }
+                }
+              }
+            },
+            "A3": {
+              "type": "object",
+              "title": "SectionA3",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "table1": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    },
+                    "table2": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    }
+                  }
+                }
+              }
+            },
+            "A4  ": {
+              "type": "object",
+              "title": "SectionA4",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "table1": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    },
+                    "table2": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    },
+                    "notes1": {
+                      "type": "string"
+                    },
+                    "notes2": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "A5": {
+              "type": "object",
+              "title": "SectionA5",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "table": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    }
+                  }
+                }
+              }
+            },
+            "A6": {
+              "type": "object",
+              "title": "SectionA6",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "G1": {
+                      "type": "object",
+                      "properties": {
+                        "choice": {
+                          "type": "boolean"
+                        },
+                        "values": {
+                          "type": "object",
+                          "properties": {
+                            "c1": {
+                              "type": "string"
+                            },
+                            "c2": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "G2": {
+                      "type": "object",
+                      "properties": {
+                        "values": {
+                          "type": "object",
+                          "properties": {
+                            "c1": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "G3": {
+                      "type": "object",
+                      "properties": {
+                        "values": {
+                          "type": "object",
+                          "properties": {
+                            "c1": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "G4": {
+                      "type": "object",
+                      "properties": {
+                        "choice": {
+                          "type": "boolean"
+                        },
+                        "values": {
+                          "type": "object",
+                          "properties": {
+                            "c1": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "G5": {
+                      "type": "object",
+                      "properties": {
+                        "values": {
+                          "type": "object",
+                          "properties": {
+                            "c1": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "G6": {
+                      "type": "object",
+                      "properties": {
+                        "choice": {
+                          "type": "boolean"
+                        },
+                        "values": {
+                          "type": "object",
+                          "properties": {
+                            "c1": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "questionnaires": {
+          "type": "object",
+          "properties": {
+            "q1": {
+              "$ref": "#/definitions/postQ1",
+              "type": "object"
+            },
+            "q2": {
+              "$ref": "#/definitions/postQ1",
+              "type": "object"
+            },
+            "q3": {
+              "$ref": "#/definitions/postQ1",
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+
+    "contactPerson": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "./profile.json#/definitions/Representative"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "postQ1": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/definitions/contactPerson"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "groups": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "title": "groupOfTables",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "codeBase": {
+                    "type": "string"
+                  },
+                  "hasTotalSum": {
+                    "type": "boolean"
+                  },
+                  "tables": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "./common.json#/definitions/qTable"
+                    }
+                  },
+                  "isTradeSecret": {
+                    "type": "boolean"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

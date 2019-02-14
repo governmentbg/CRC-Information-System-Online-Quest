@@ -1,0 +1,35 @@
+{
+  "pid": "123",
+  "uid": "123",
+  "name": "Company",
+  "representative": {
+    "namePrefix": "Mr",
+    "firstName": "Gogo",
+    "middleName": "Gogov",
+    "lastName": "Gogov",
+    "position": "manager"
+  },
+  "legalForm": "Ltd.",
+  "employeesCount": "100",
+  "authorizedPerson": {
+    "id": "",
+    "namePrefix": "Mr",
+    "firstName": "Gogo",
+    "middleName": "Gogov",
+    "lastName": "Gogov",
+    "egn": "1234567890",
+    "email": "aa@aa.com",
+    "usernamePassData": {
+      "username": "gogo",
+      "password": "123"
+    }
+  },
+  "address": {
+    "ekatte": {
+      "id": "10046",
+      "fullName": "Ваклиново"
+    },
+    "address": "street",
+    "postalCode": "12345"
+  }
+}

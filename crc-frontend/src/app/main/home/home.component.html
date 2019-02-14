@@ -1,0 +1,8 @@
+<div class="home-container">
+    <div class="home-header">
+        <h2>Избор на</h2>
+        <mat-divider></mat-divider>
+    </div>
+
+    <app-company-card *ngFor="let company of userCompanies" [company]="company"></app-company-card>
+</div>

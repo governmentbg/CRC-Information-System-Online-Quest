@@ -1,0 +1,39 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.total{
+    background-color: #DADADA;
+}
+
+table {
+    font-size: 1.2em;
+    table-layout: auto;
+}
+
+table {
+    input {
+        border: none;
+        text-align: center;
+        color: black;
+    }
+    
+    input[disabled] {
+        background-color: #DADADA;
+        font-size: 1em;
+    }
+}
+
+%vertical-align-middle {
+    vertical-align: middle;
+}
+
+table {
+    thead > tr > th {
+        text-align: center;
+        @extend %vertical-align-middle;
+    }
+    
+    tfoot > tr > th {
+        text-align: center;
+        @extend %vertical-align-middle;
+    }
+}

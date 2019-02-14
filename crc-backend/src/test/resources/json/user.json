@@ -1,0 +1,13 @@
+{
+  "id": "",
+  "namePrefix": "Mr",
+  "firstName": "Bogo",
+  "middleName": "Bogov",
+  "lastName": "Bogov",
+  "egn": "1234567891",
+  "email": "bb@aa.com",
+  "usernamePassData": {
+    "username": "bogo",
+    "password": "123"
+  }
+}

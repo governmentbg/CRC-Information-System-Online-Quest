@@ -1,0 +1,99 @@
+<form [formGroup]="postSecurityFormGroup" class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column"
+      fxLayoutAlign="start" fxFlex="1 0 auto">
+      <span>1. Разполагате ли с технически устройства и софтуерн за защита на пощенски трафик</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-radio-group>
+          <mat-radio-button style="margin-right: 1em;" value="true">Да</mat-radio-button>
+          <mat-radio-button value="false">Не</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <span>1.1 Ако разполагате със средства по т., моля посочете:</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+          <mat-label>Собствени (бр.)</mat-label>
+          <input matInput>
+          <mat-error>First Name is required!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="100" class="pl-4">
+          <mat-label>Под наем(**)(бр.)</mat-label>
+          <input matInput>
+          <mat-error>Last Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+          <mat-label>(**) Моля посочете дружествата, чиято собственост са наетите устройства</mat-label>
+          <input matInput>
+          <mat-error>First Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <span>2. Моля посочете в проценти .... :</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+          <mat-label>(в %)</mat-label>
+          <input matInput>
+          <mat-error>First Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <span>3. Моля, избройте какви превантивни мерки сте преприели .... :</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+          <input matInput>
+          <mat-error>First Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <span>4. Имате ли случай на вложени в пощенските пратки .... :</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-radio-group>
+          <mat-radio-button style="margin-right: 1em;" value="true">Да</mat-radio-button>
+          <mat-radio-button value="false">Не</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <span>* Ако отговора по т.4 е ДА .... :</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+          <input matInput>
+          <mat-error>First Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <span>5. Моля посочете Вашите предложения в коментари за подобряване на пощенската сигурност:</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+          <input matInput>
+          <mat-error>First Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <span>6. Имате ли въведени мерки за опазване на околната среда? :</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-radio-group>
+          <mat-radio-button style="margin-right: 1em;" value="true">Да</mat-radio-button>
+          <mat-radio-button value="false">Не</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <span>* Ако отговора по е ДА .... :</span>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+          <input matInput>
+          <mat-error>First Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <mat-checkbox>Търговска тайна</mat-checkbox>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+          <mat-label>Бележки</mat-label>
+          <input matInput>
+          <mat-error>First Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+    </form>

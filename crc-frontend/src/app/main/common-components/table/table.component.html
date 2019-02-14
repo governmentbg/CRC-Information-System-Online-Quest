@@ -1,0 +1,38 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+      {{name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="table-responsive">
+    
+      <table class="table" [formGroup]="formGroup">
+        <thead>
+           <tr>
+             <th *ngFor="let rowData of rows | slice: 0:1">{{rowData.text}}</th>
+             <th *ngFor="let title of columns.columnsTitle">{{title}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rowData of rows | slice: 1:rows.length" 
+            [row]="rowData" 
+            [tableFormGroup]="formGroup" 
+            [formGroupName]="rowData.id"
+            [columnsCount]="columns.count"
+            (onInputChange)="inputChange($event)">
+          </tr>
+        </tbody>
+        <tfoot class="total">
+          <tr>
+            <th class="total-text" scope="row">Total</th>
+            <td *ngFor="let total of res; let idx=index">
+              <input type="number" disabled class="form-control" [value]="res[idx]">
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <button matButton (click)="getData()">DATA</button>
+  </mat-expansion-panel>
+</mat-accordion>

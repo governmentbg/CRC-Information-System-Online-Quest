@@ -1,0 +1,36 @@
+{
+  "id": "",
+  "pid": "9999",
+  "uid": "9999",
+  "name": "Company_9999",
+  "representative": {
+    "namePrefix": "Mr",
+    "firstName": "Gogo",
+    "middleName": "Gogov",
+    "lastName": "Gogov",
+    "position": "manager"
+  },
+  "legalForm": "Ltd.",
+  "employeesCount": "100",
+  "authorizedPerson": {
+    "id": "",
+    "namePrefix": "Mr",
+    "firstName": "Gogo_9999",
+    "middleName": "Gogov_9999",
+    "lastName": "Gogov_9999",
+    "egn": "1234567890",
+    "email": "aa9999@aa.com",
+    "signatureDeviceData": {
+      "egnFromDevice": "6305186923",
+      "mailFromDevice": "aa9999@aa.com"
+    }
+  },
+  "address": {
+    "ekatte": {
+      "id": "10046",
+      "fullName": "Ваклиново"
+    },
+    "address": "street",
+    "postalCode": "12345"
+  }
+}

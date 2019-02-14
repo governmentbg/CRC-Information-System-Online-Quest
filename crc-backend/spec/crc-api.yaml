@@ -1,0 +1,648 @@
+swagger: "2.0"
+
+info:
+  title: The Communications Regulation Commission Questionary API
+  description: API description in Markdown.
+  version: 1.0.0
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  contact:
+    name: Michael Spasov
+    email: michael.spasov@bul-si.bg
+
+host: localhost
+schemes:
+  - http
+  - https
+
+basePath: /api
+
+tags:
+  - name: auth
+    description: Authentication
+
+#consumes:
+#  - application/json
+#  - application/xml
+
+produces:
+  - application/json
+
+responses:
+  crcApiResponse:
+    description: OK
+    schema:
+      $ref: '#/definitions/CrcApiResponse'
+
+
+paths:
+  # ---------------------------------------------------------------------
+  # Authentication controller
+  # ---------------------------------------------------------------------
+  /auth/signin:
+    post:
+      summary: Signin
+      operationId: authenticateUser
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: loginRequest
+          required: true
+          schema:
+            $ref: './auth.json#/definitions/LoginRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './auth.json#/definitions/JwtAuthenticationResponse'
+
+  /auth/signup:
+    post:
+      summary: Signup
+      operationId: registerUser
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: signUpRequest
+          required: true
+          schema:
+            $ref: './profile.json#/definitions/User'
+      responses:
+        200:
+          $ref: '#/responses/crcApiResponse'
+
+  /auth/saml:
+    get:
+      summary: Generate SAML request
+      operationId: spSamlRequest
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: Return SAML request
+          schema:
+            $ref: './auth.json#/definitions/SamlRequestParams'
+
+  /auth/saml-signin:
+    post:
+      summary: Sign in with SAML protocol
+      operationId: samlSignin
+      parameters:
+        - in: formData
+          name: samlResponse
+          type: string
+          required: true
+          description: Base64 encoded SAML 2.0 responce
+        - in: formData
+          type: string
+          required: true
+          name: relayState
+          description: SAML 2.0 Relay State
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './auth.json#/definitions/JwtAuthenticationResponse'
+
+  # ---------------------------------------------------------------------
+  # Profile controller
+  # Company
+  # ---------------------------------------------------------------------
+  /profile/co:
+    post:
+      summary: Create new company.
+      operationId: createCompany
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: newCompany
+          required: true
+          schema:
+            $ref: './profile.json#/definitions/Company'
+      responses:
+        201:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/Company'
+        409:
+          description: Company exists
+          schema:
+            $ref: '#/definitions/CrcApiResponse'
+
+    put:
+      summary: Update the company data.
+      operationId: updateCompany
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: companyToUpdate
+          required: true
+          schema:
+            $ref: './profile.json#/definitions/Company'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/Company'
+        417:
+          description: 417
+          schema:
+            $ref: '#/definitions/CrcApiResponse'
+
+    delete:
+      summary: Delete Company
+      operationId: deleteCompany
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CrcApiResponse'
+        200:
+          description: OK
+          schema:
+            type: object
+
+  /profile/co/{id}:
+    get:
+      summary: Get company by ID
+      operationId: getCompanyById
+      produces:
+        - application/json
+      parameters:
+        - name: "id"
+          in: path
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/Company'
+        404:
+          description: Not Found
+
+  /profile/co/{id}/eik:
+    get:
+      summary: Get company by EIK
+      operationId: getCompanyByEik
+      produces:
+        - application/json
+      parameters:
+        - name: "id"
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: './profile.json#/definitions/Company'
+        404:
+          description: Not Found
+
+  /profile/co/{id}/uri:
+    get:
+      summary: Get company by URI
+      operationId: getCompanyByUri
+      produces:
+        - application/json
+      parameters:
+        - name: "id"
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: './profile.json#/definitions/Company'
+        404:
+          description: Not Found
+
+  /profile/co/all:
+    get:
+      summary: Get all companies
+      operationId: getAllCompanies
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: './profile.json#/definitions/Company'
+        404:
+          description: Not Found
+
+  # ---------------------------------------------------------------------
+  # CRC User
+  # ---------------------------------------------------------------------
+  /profile/crc/user:
+    post:
+      summary: Create CRC user
+      operationId: createCrcUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            $ref: './profile.json#/definitions/User'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/User'
+        409:
+          schema:
+            $ref: '#/definitions/CrcApiResponse'
+    put:
+      summary: Update CRC user
+      operationId: updateCrcUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            $ref: './profile.json#/definitions/User'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/User'
+
+    delete:
+      summary: Delete CRC user
+      operationId: deleteCrcUser
+      parameters:
+        - in: query
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: OK
+        404:
+          description: Not Found
+
+  /profile/crc/users/all:
+    get:
+      summary: Return all CRC users
+      operationId: getAllCrcUsers
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        200:
+          description: Return list of matche users
+          schema:
+            type: array
+            items:
+              $ref: './profile.json#/definitions/User'
+        404:
+          description: Not found
+
+  /profile/crc/user/{id}:
+    get:
+      summary: Return CRC user by unique ID
+      operationId: getCrcUserById
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/User'
+        404:
+          description: Not Found
+
+  /profile/crc/user/{id}/egn:
+    get:
+      summary: Return CRC user by its PID
+      operationId: getCrcUserByPid
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/User'
+        404:
+          description: Not Found
+
+  /profile/crc/users/search/egn:
+    get:
+      summary: Return CRC user by its PID
+      operationId: searchCrcUserByPid
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: pid
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: './profile.json#/definitions/User'
+
+  # ---------------------------------------------------------------------
+  # User
+  # ---------------------------------------------------------------------
+  /profile/user:
+    post:
+      summary: Create user
+      operationId: createUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            $ref: './profile.json#/definitions/User'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/User'
+        409:
+          schema:
+            $ref: '#/definitions/CrcApiResponse'
+
+    put:
+      summary: Update user
+      operationId: updateUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            $ref: './profile.json#/definitions/User'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/User'
+
+    delete:
+      summary: Delete user
+      operationId: deleteUser
+      parameters:
+        - in: query
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: OK
+        404:
+          description: Not Found
+
+  /profile/user/{id}:
+    get:
+      summary: Get user by id
+      operationId: getUserById
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/User'
+        404:
+          description: Not Found
+
+  /profile/user/{id}/egn:
+    get:
+      summary: Get user by EGN
+      operationId: getUserByEgn
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './profile.json#/definitions/User'
+        404:
+          description: Not Found
+
+  /profile/user/{id}/operators:
+    get:
+      summary: Get managed operators
+      operationId: getManagedOperatorsByUser
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: './profile.json#/definitions/User'
+        404:
+          description: Not Found
+
+  /profile/user/search/all:
+    post:
+      summary: Find users by name, egn or username
+      operationId: getUserByCriteria
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - in: body
+          name: criteria
+          schema:
+            $ref: './profile.json#/definitions/UserSearchCriteria'
+          required: true
+      responses:
+        200:
+          description: Return list of matche users
+          schema:
+            type: array
+            items:
+              $ref: './profile.json#/definitions/User'
+        404:
+          description: Not found
+
+  # ---------------------------------------------------------------------
+  # EKATTE
+  # ---------------------------------------------------------------------
+  /ekatte/place:
+    post:
+      summary: Get EKATTEs by place name
+      operationId: getByPlace
+      parameters:
+        - in: body
+          name: placeReq
+          required: true
+          schema:
+            $ref: './profile.json#/definitions/EkatteReq'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: './profile.json#/definitions/Ekatte'
+        404:
+          description: Not Found
+
+  # ---------------------------------------------------------------------
+  # Zpu
+  # ---------------------------------------------------------------------
+  /zpu-questionnaire/new:
+    get:
+      summary:
+      operationId: createNewQuestionnaire
+      parameters:
+        - in: query
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './questionnaire.json#/definitions/postQuestionnaire'
+
+  /zpu-questionnaire/{id}/draft:
+    put:
+      summary: Save DRAFT Document
+      operationId: saveDraftDocument
+      parameters:
+        - in: path
+          name: companyId
+          type: integer
+          format: int64
+          required: true
+        - in: body
+          name: questionnaire
+          required: true
+          schema:
+            $ref: './questionnaire.json#/definitions/postQuestionnaire'
+
+      responses:
+        202:
+          description: Updated
+          schema:
+            $ref: './questionnaire.json#/definitions/postQuestionnaire'
+
+  # ---------------------------------------------------------------------
+  # ZES
+  # ---------------------------------------------------------------------
+  /zes-questionnaire/new:
+    get:
+      summary:
+      operationId: createNewQuestionnaire
+      parameters:
+        - in: query
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: './questionnaire.json#/definitions/zesQuestionnaire'
+
+
+
+
+
+
+# ---------------------------------------------------------------------
+# JSON Schema definitions
+# ---------------------------------------------------------------------
+definitions:
+
+  CrcApiResponse:
+    type: object
+    xml:
+      name: ApiResponse
+    properties:
+      success:
+        type: boolean
+      message:
+        type: string

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>bg.bulsi</groupId>
+        <artifactId>crc-parent</artifactId>
+        <version>1.1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>crc-frontend</artifactId>
+    <name>CRC Frontend</name>
+    <description></description>
+
+    <properties>
+        <main.basedir>${project.parent.basedir}</main.basedir>
+        <checkstyle.skip>true</checkstyle.skip>
+    </properties>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>ui-src</directory>
+                <!--<targetPath>/META-INF/angular</targetPath>-->
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.6</version>
+
+                <configuration>
+                    <nodeVersion>v10.14.1</nodeVersion>
+                    <yarnVersion>v1.13.0</yarnVersion>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>install node and yarn</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <!--<execution>
+                        <id>yarn lint</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>lint</arguments>
+                        </configuration>
+                    </execution>-->
+                    <execution>
+                        <id>yarn build prod</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>build-prod</arguments>
+                        </configuration>
+                    </execution>
+                    <!--  <execution>
+                          <id>yarn test</id>
+                          <goals>
+                              <goal>yarn</goal>
+                          </goals>
+                          <phase>test</phase>
+                          <configuration>
+                              <arguments>test</arguments>
+                              <failOnError>true</failOnError>
+                          </configuration>
+                      </execution>-->
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

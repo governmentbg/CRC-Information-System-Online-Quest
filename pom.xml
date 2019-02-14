@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>bg.bulsi</groupId>
+	<artifactId>crc-parent</artifactId>
+	<version>1.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<name>CRC Parent Maven Project</name>
+	<modules>
+		<module>crc-backend</module>
+        <module>crc-frontend</module>
+		<module>crc-document-templates</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+		<spring.boot.version>2.1.2.RELEASE</spring.boot.version>
+		<jjwt.version>0.9.1</jjwt.version>
+		<eauth-client-util.version>1.0.0</eauth-client-util.version>
+
+		<!-- Use most recent failsafe and surefire plugin versions -->
+		<maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
+		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+
+        <!-- Swagger 2.0 -->
+		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+		<swagger-codegen-maven-plugin.version>2.4.1</swagger-codegen-maven-plugin.version>
+		<swagger-annotations.version>2.0.0-rc2</swagger-annotations.version>
+
+		<jodconverter.version>4.2.2</jodconverter.version>
+
+		<junit-jupiter.version>5.3.2</junit-jupiter.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- For Working with Json Web Tokens (JWT) -->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>${jjwt.version}</version>
+			</dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-bean-validators</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+
+			<dependency>
+				<groupId>com.github.joschi.jackson</groupId>
+				<artifactId>jackson-datatype-threetenbp</artifactId>
+				<version>2.8.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-joda</artifactId>
+				<version>2.9.8</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jodconverter</groupId>
+				<artifactId>jodconverter-local</artifactId>
+				<version>${jodconverter.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>4.0.1</version>
+			</dependency>
+
+            <dependency>
+                <groupId>net.optionfactory</groupId>
+                <artifactId>hibernate-json</artifactId>
+                <version>2.0</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>4.0.1</version>
+			</dependency>
+
+            <!-- eAuth client -->
+			<dependency>
+				<groupId>bg.bulsi.modules</groupId>
+				<artifactId>eauth-client-util</artifactId>
+				<version>${eauth-client-util.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${spring.boot.version}</version>
+				<scope>test</scope>
+				<!-- Exclude JUnit 4 from starter-test (and all other related test-starter, i.e
+			     those for security and project reactor -->
+				<exclusions>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+
+			<!-- Provide JUnit 5 API -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- and the engine for surefire and failsafe -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-codegen-maven-plugin</artifactId>
+                    <version>${swagger-codegen-maven-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>io.swagger</groupId>
+                            <artifactId>swagger-annotations</artifactId>
+                            <version>${swagger-annotations.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <pluginRepositories>
+
+    </pluginRepositories>
+
+	<repositories>
+		<repository>
+			<id>BULSI-maven-releases</id>
+			<url>http://repository.bul-si.bg:9081/repository/maven-releases/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>BULSI-maven-snapshots</id>
+			<url>http://repository.bul-si.bg:9081/repository/maven-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+        </repository>
+        <repository>
+            <id>jcenter-snapshots</id>
+            <name>jcenter</name>
+            <url>https://jcenter.bintray.com/</url>
+        </repository>
+	</repositories>
+
+	<profiles>
+		<profile>
+			<id>java9+</id>
+			<activation>
+				<jdk>[9,)</jdk>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>javax.xml.bind</groupId>
+					<artifactId>jaxb-api</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
+</project>

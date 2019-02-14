@@ -1,0 +1,23 @@
+package {{apiPackage}};
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+{{>generatedAnnotation}}
+public class ApiException extends Exception {
+
+@Getter
+@Setter
+private int code;
+
+public ApiException (String msg) {
+this(1, msg);
+}
+
+public ApiException (int code, String msg) {
+super(msg);
+this.code = code;
+}
+}

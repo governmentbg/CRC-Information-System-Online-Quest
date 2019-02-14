@@ -1,0 +1,21 @@
+<!-- <mat-vertical-stepper [linear]="isLinear"> -->
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{codeBase}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+        <app-table *ngFor="let table of tables"
+          [groupCodeBase]="codeBase" 
+          [key]="table.key" 
+          [rows]="table.rows" 
+          [columns]="table.columns"
+          [hasValidation]="table.hasCompCntValidation"></app-table>
+
+      <app-trade-sercret></app-trade-sercret>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+<!-- </mat-vertical-stepper> -->

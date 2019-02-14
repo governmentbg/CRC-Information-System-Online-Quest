@@ -1,0 +1,17 @@
+%tabble-row-padding {
+    padding: 20px;
+}
+
+%vertical-align-middle {
+    vertical-align: middle;
+}
+
+th {
+    text-align: left;
+    @extend %vertical-align-middle;
+}
+
+td {
+    @extend %tabble-row-padding;
+    text-align: center;
+}

@@ -1,0 +1,35 @@
+{
+  "pid": "13123",
+  "uid": "123123",
+  "name": "weq 123123",
+  "legalForm": "qwe",
+  "employeesCount": 123,
+  "representative": {
+    "namePrefix": "Mr",
+    "firstName": "qwe",
+    "middleName": "qwe",
+    "lastName": "ewq",
+    "position": "qwe1111 123"
+  },
+  "address": {
+    "address": "qweqwe",
+    "postalCode": "4444",
+    "ekatte": {
+      "id": "00151"
+    }
+  },
+  "authorizedPerson": {
+    "namePrefix": "Mr",
+    "firstName": "qwe",
+    "middleName": "qwe",
+    "lastName": "qwe",
+    "egn": "1010101010",
+    "email": "qweert@qweert.qwe",
+    "usernamePassData": {
+      "username": "qweert",
+      "password": "1234"
+    },
+    "id": 47
+  },
+  "id": 31
+}

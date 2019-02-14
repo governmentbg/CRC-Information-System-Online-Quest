@@ -1,0 +1,23 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Лице за контакт по въпросник
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-contact></app-contact>
+  </mat-expansion-panel>
+  <mat-expansion-panel> 
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        test
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-group *ngFor="let group of groups | async"
+      [codeBase]="group.codeBase" 
+      [id]="group.id"   
+      [isLinear]="group.isLinear" 
+      [tables]="group.tables">
+    </app-group>
+  </mat-expansion-panel>
+</mat-accordion>

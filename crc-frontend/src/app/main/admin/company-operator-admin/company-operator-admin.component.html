@@ -1,0 +1,150 @@
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+
+    <!-- HEADER -->
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+        fxLayoutAlign.gt-xs="space-between center">
+
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <!--<button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('contacts-main-sidebar')">-->
+            <!--<mat-icon>menu</mat-icon>-->
+            <!--</button>-->
+
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Администриране на потребители
+                </span>
+            </div>
+
+        </div>
+        <!-- / APP TITLE -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- CENTER -->
+        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+
+            <!-- SEARCH -->
+            <!-- <mat-form-field appearance="legacy">
+                    <input matInput placeholder="ЕГН" (keyup)="applyEGNFilter($event.target.value)">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field> -->
+            <!-- / SEARCH -->
+            <!-- CONTENT -->
+            <div class="content">
+                <mat-table #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}">
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="checkbox">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let user">
+                            <mat-checkbox [(ngModel)]="checkboxes[user.id]" (ngModelChange)="onSelectedChange(user.id)"
+                                (click)="$event.stopPropagation()">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="firstName">
+                        <mat-header-cell *matHeaderCellDef>Име</mat-header-cell>
+                        <mat-cell *matCellDef="let user">
+                            <p class="text-truncate font-weight-600">{{user.firstName}}</p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="lastName">
+                        <mat-header-cell *matHeaderCellDef>Фамилия</mat-header-cell>
+                        <mat-cell *matCellDef="let user">
+                            <p class="email text-truncate">
+                                {{user.lastName}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Phone Column -->
+                    <ng-container matColumnDef="email">
+                        <mat-header-cell *matHeaderCellDef>Имейл</mat-header-cell>
+                        <mat-cell *matCellDef="let user">
+                            <p class="phone text-truncate">
+                                {{user.email}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Job Title Column -->
+                    <ng-container matColumnDef="activeTo">
+                        <mat-header-cell *matHeaderCellDef>ЕГН</mat-header-cell>
+                        <mat-cell *matCellDef="let user">
+                            <p class="job-title text-truncate">
+                                {{user.egn}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <!-- <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
+                            <mat-cell *matCellDef="let user">
+                                <div *ngIf="user.activationStatus">
+                                    <p style="color: green" class="job-title text-truncate">
+                                        Активен
+                                    </p>
+                                </div>
+                                <div *ngIf="!user.activationStatus">
+                                    <p style="color: red" class="job-title text-truncate">
+                                        Неактивен
+                                    </p>
+                                </div>
+                            </mat-cell> -->
+                            <mat-header-cell *matHeaderCellDef>
+                                Статус
+                            </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()" (change)="getSelectedUser($event, row)"
+                                [checked]="row.activationStatus">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let user">
+                            <button mat-menu-item aria-label="edit" (click)="editCrcUser(user)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+
+                        </mat-cell>
+                    </ng-container> -->
+
+                    <!-- Buttons Column -->
+
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let user; columns: displayedColumns;" class="contact" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+                    </mat-row>
+                </mat-table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CENTER -->
+
+    </div>
+    <!-- / CONTENT-->
+
+</div>
+
+<!-- ADD CONTACT BUTTON -->
+<!-- <button mat-fab class="accent" id="add-contact-button" (click)="newContact()" aria-label="add contact"
+            [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+        <mat-icon>person_add</mat-icon>
+    </button> -->
+<!-- / ADD CONTACT BUTTON -->
